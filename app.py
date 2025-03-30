@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, render_template
 from twilio.twiml.messaging_response import MessagingResponse
 from datetime import datetime
 
@@ -304,6 +304,13 @@ def get_zodiac_sign(dob):
         if (month == start_month and day >= start_day) or (month == end_month and day <= end_day):
             return sign, info
     return None, None  # If no match is found
+
+
+# 📌 Route for the index page
+@app.route("/")
+def index():
+    return render_template("index.html")  # Loads the index.html file
+
 
 @app.route("/whatsapp", methods=["POST"])
 def whatsapp_bot():
